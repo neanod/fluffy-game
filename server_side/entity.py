@@ -7,7 +7,7 @@ class Entity:
         self,
         pos: pg.Vector2,
         size: pg.Vector2,
-        texture: pg.Surface,
+        texture: pg.Surface | None,
         screen: pg.Surface,
         angle: float,
     ):

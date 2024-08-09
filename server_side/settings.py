@@ -10,4 +10,7 @@ class Settings:
     height_half = height // 2
     center = width_half, height_half
 
+    default_player_speed = 1
+    default_bullet_speed = 2 * default_player_speed
+
     every_n_update = math.ceil(FPS/60)
