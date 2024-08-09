@@ -18,19 +18,21 @@ class Entity:
         self.texture = texture
         
         self.speed: pg.Vector2 = pg.Vector2(0, 0)
-        temp: tuple[pg.Surface, pg.Vector2] = self.update_current_texture()
-        self.current_texture: pg.Surface = temp[0]
-        self.current_draw_offset: pg.Vector2 = temp[1]
+        self.current_texture: pg.Surface = self.get_current_texture()
+        self.current_draw_offset: pg.Vector2 = self.get_current_offset()
     
     def update(self) -> None:
         self.pos += self.speed
 
     def set_angle(self, new_angle: float) -> None:
         self.angle = new_angle
-        self.update_current_texture()
+        self.current_texture = self.get_current_texture()
     
-    def update_current_texture(self) -> tuple[pg.Surface, pg.Vector2]:
-        return pg.transform.rotate(pg.transform.smoothscale(self.texture, self.size), math.degrees(self.angle)), pg.Vector2(self.current_texture.get_rect().size) / 2
+    def get_current_texture(self) -> pg.Surface:
+        return pg.transform.rotate(pg.transform.scale(self.texture, self.size), math.degrees(self.angle))
+    
+    def get_current_offset(self) -> pg.Vector2:
+        return pg.Vector2(self.current_texture.get_rect().size) / 2
 
     def render(self) -> None:
         self.sc.blit(
