@@ -1,3 +1,4 @@
+from settings import Settings
 from pygame import Vector2
 from entity import Entity, pg, math
 from settings import Settings
@@ -12,6 +13,8 @@ class Bullet(Entity):
         texture: pg.Surface,
         screen: pg.Surface,
         angle: float,
+        bullets_array: list,
+        index: int,
         speed: float = Settings.default_bullet_speed,
     ):
         super().__init__(pos, size, texture, screen, angle)
@@ -19,4 +22,11 @@ class Bullet(Entity):
             math.sin(angle) * speed,
             math.cos(angle) * speed,
         )
+        self.bullets_array: list = bullets_array
+        self.index: int = index
+
+    def update(self) -> None:
+        if not (0 <= self.pos.x < Settings.width and 0 <= self.pos.y < Settings.height):
+            self.bullets_array.pop(self.index)
+        super().update()
         
