@@ -70,7 +70,6 @@ class App:
         self.player_processing_tps()
         self.keypress_processing()
 
-
     def keypress_processing(self) -> None:
         for event in pg.event.get():
             match event.type:
@@ -90,7 +89,7 @@ class App:
         self.to_move = to_move
 
     def window_name_update(self) -> None:
-        pg.display.set_caption(title=f"td:{self.timedelta} fps:{self.clock.get_fps()}") # currently not working with hyprland
+        pg.display.set_caption(title=f"td:{self.timedelta} fps:{round(self.clock.get_fps())}") # currently not working with hyprland
 
     def player_processing_fps(self) -> None:
         for pl in self.players:
